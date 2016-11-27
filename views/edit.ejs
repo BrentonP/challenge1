@@ -12,7 +12,7 @@
         <ul>
             <% pets.forEach( function( pet ){ %>
             <li>
-                <% if( pet._id == current ){ %>
+                <% if (current && pet._id == current ){ %>
                 <form style="display:inline-block" action="/update/<%= pet._id %>" method="post" accept-charset="utf-8">
                     <input type="text" name="petname" value="<%= pet.name %>" />
                     <input type="text" name="petspecies" value="<%= pet.species %>" />

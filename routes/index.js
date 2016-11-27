@@ -74,8 +74,8 @@ router.post('/update/:pet_id', function (req, res) {
 
 
 // delete the pet with this id 
-router.get('/delete/:pet_id', function (req, res) {
-//router.delete('/delete/:pet_id', function (req, res) {
+//router.get('/delete/:pet_id', function (req, res) {
+router.delete('/delete/:pet_id', function (req, res) {
     Pet.findById(req.params.pet_id, function (err, pet) {
         pet.remove(function (err, pet) {
             if (err)
