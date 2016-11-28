@@ -1,0 +1,108 @@
+body, 
+html {
+    background:lightgreen;
+}
+
+.petlist,
+.petlist input,
+.petlist button{
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 18px;
+    line-height: 1.25em;
+    margin: 0;
+    padding: 0;
+}
+
+/* To Do List container */
+.petlist{
+    max-width: 400px;
+    margin: 0 auto;    
+}
+
+.petlist h1{
+    font-size: 40px;
+    text-align: center;
+    color: darkgreen;
+}
+
+/* Pet List Header */
+.petlist .pet-input{
+    display: inline-flex;
+    background: darkgreen;
+    justify-content: space-between;
+    width: 100%;
+}
+.petlist .pet-input input{
+    color: white;
+    width: 100%;    
+    padding: 14px;
+    /*add a line between elements*/
+    border-right: 2px solid green; 
+}
+/* Add Pet Button */
+.petlist .pet-input button{    
+    color: white;
+    font-weight: bold;    
+    background: limegreen;
+    padding: 14px;
+}
+.petlist .pet-input button:hover{
+    background: greenyellow;
+}
+
+/* Pet List container */
+.petlist .pet-list ul,
+.petlist .pet-list .pet-row,
+.petlist .pet-list .pet-row input,
+.petlist .pet-list .pet-row button
+{
+    border: none;
+    outline: none;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.petlist .pet-list ul{
+    background: white;
+}
+
+/* Pet Row */
+.petlist .pet-list .pet-row{
+    display: block;
+    position: relative;
+    padding: 14px;
+    border-top: 1px solid lightgray;
+}
+.petlist .pet-list .pet-row-edit{
+    border-top: 1px solid lightgray;
+}
+
+.petlist .pet-list .pet-row-edit input {
+    background-color: white;
+    border-right:none;
+    color:red;
+}
+
+
+/* Make the Delete Button invisible unless we hover over the row*/
+.petlist .pet-list .pet-row #deleteBtn{
+    color: lightgrey;
+    font-weight: bold;
+    position: absolute;
+    top:0;
+    opacity: 0;
+    margin: 14px;
+    right:0px;
+}
+.petlist .pet-list .pet-row:hover > #deleteBtn{
+    opacity: 1;
+}
+.petlist .pet-list .pet-row #deleteBtn:hover {
+    color: red;
+}
+

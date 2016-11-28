@@ -1,34 +1,32 @@
-// server.js
-
-// BASE SETUP
-// =============================================================================
-
 // call the packages we need
 var express = require('express'); // call express
+var path = require('path');
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var url = process.env.MONGOLAB_URI;
-//var url = 'mongodb://localhost/pet_db';
-
-mongoose.connect(url);
+// connect to the mongo db
+var dbURI = process.env.MONGOLAB_URI;
+mongoose.connect(dbURI);
 
 var index = require('./routes/index');
 
 // define our app using express
 var app = express();
 
+// set the port
+var port = process.env.PORT || 8080;        // set our port
+
 // set up view engine
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-var port = process.env.PORT || 8080;        // set our port
 
 var router = express.Router();              // get an instance of the express Router
 

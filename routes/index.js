@@ -21,24 +21,28 @@ router.post('/addpet', function (req, res) {
     var petName = req.body.petname; // get the pet's name from the request
     var petSpecies = req.body.petspecies; // get the pet's species from the request
 
-    var pet = new Pet({// create a new instance of the Pet model
-        name: petName, // set the pet's name
-        species: petSpecies // set the pet's species
-    });
+    // only proceed if both items have been entered
+    if (petName.length !== 0 && petSpecies.length !== 0) {
 
-    // save the pet and check for errors
-    pet.save(function (err) {
-        if (err)
-            res.send(err);
+        var pet = new Pet({// create a new instance of the Pet model
+            name: petName, // set the pet's name
+            species: petSpecies // set the pet's species
+        });
 
-        res.redirect('/');
-    });
+        // save the pet and check for errors
+        pet.save(function (err) {
+            if (err)
+                res.send(err);
+
+            res.redirect('/');
+        });
+    }
 });
 
 
 router.get('/edit/:pet_id', function (req, res) {
     Pet.find(function (err, pets) {
-        res.render('edit', {
+        res.render('index', {
             title: 'Edit Pets',
             pets: pets,
             current: req.params.pet_id
@@ -56,18 +60,24 @@ router.post('/update/:pet_id', function (req, res) {
         if (err)
             res.send(err);
 
-        pet.name = req.body.petname;  // update the pets info
-        pet.species = req.body.petspecies;  // update the pets info
+        var petName = req.body.petname; // get the pet's name from the request
+        var petSpecies = req.body.petspecies; // get the pet's species from the request
+        
+        // only proceed if both items have been entered
+        if (petName.length !== 0 && petSpecies.length !== 0) {
 
-        // save the pet
-        pet.save(function (err) {
-            if (err)
-                res.send(err);
+            pet.name = req.body.petname;  // update the pets info
+            pet.species = req.body.petspecies;  // update the pets info
 
-            res.redirect('/');
+            // save the pet
+            pet.save(function (err) {
+                if (err)
+                    res.send(err);
 
-        });
+                res.redirect('/');
 
+            });
+        }
     });
 });
 
@@ -75,7 +85,7 @@ router.post('/update/:pet_id', function (req, res) {
 
 // delete the pet with this id 
 //router.get('/delete/:pet_id', function (req, res) {
-router.delete('/delete/:pet_id', function (req, res) {
+router.get('/delete/:pet_id', function (req, res) {
     Pet.findById(req.params.pet_id, function (err, pet) {
         pet.remove(function (err, pet) {
             if (err)
